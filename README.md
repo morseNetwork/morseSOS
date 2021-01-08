@@ -130,8 +130,7 @@ Example:
 2. Copy the namehash (1) and click on the `Resolver` link (2)
    ![enslookup](docs/enslookup.png)
 3. Go to the `Contract` tab. Click on `Read Contract` and scroll down to the `5. text` method.
-4. Put the values:
-   ![resolver](docs/resolver.png)
+4. Put the values.
 5. Click `Query` and you will get the DNS name. Just add `https://` to it and use it as `relayer url`
 
 ## Credits
