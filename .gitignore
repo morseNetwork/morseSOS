@@ -1,7 +1,6 @@
 build
 .vscode
 /index.js
-Tornado_flat.sol
 
 # Created by .ignore support plugin (hsz.mobi)
 ### Node template
@@ -94,5 +93,3 @@ typings/
 # DynamoDB Local files
 .dynamodb/
 
-ERC20Tornado_flat.sol
-ETHTornado_flat.sol

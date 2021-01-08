@@ -8,7 +8,7 @@ const fs = require('fs')
 const { toBN, randomHex } = require('web3-utils')
 const { takeSnapshot, revertSnapshot } = require('../lib/ganacheHelper')
 
-const Tornado = artifacts.require('./ETHTornado.sol')
+const Tornado = artifacts.require('./ETHXCD.sol')
 const { ETH_AMOUNT, MERKLE_TREE_HEIGHT } = process.env
 
 const websnarkUtils = require('websnark/src/utils')
@@ -51,7 +51,7 @@ function snarkVerify(proof) {
   return snarkjs['groth'].isValid(verification_key, proof, proof.publicSignals)
 }
 
-contract('ETHTornado', accounts => {
+contract('ETHXCD', accounts => {
   let tornado
   const sender = accounts[0]
   const operator = accounts[0]
