@@ -6,7 +6,6 @@ To make a deposit user generates a secret and sends its hash (called a commitmen
 
 Later, the user decides to make a withdrawal. To do that, the user should provide a proof that he or she possesses a secret to an unspent commitment from the smart contract’s list of deposits. zkSnark technology allows that to happen without revealing which exact deposit corresponds to this secret. The smart contract will check the proof, and transfer deposited funds to the address specified for withdrawal. An external observer will be unable to determine which deposit this withdrawal came from.
 
-<!-- You can read more about it in [this medium article](https://medium.com/@tornado.cash/introducing-private-transactions-on-ethereum-now-42ee915babe0) -->
 
 ## Specs
 
@@ -20,17 +19,13 @@ Later, the user decides to make a withdrawal. To do that, the user should provid
 
 ## Whitepaper
 
-<!-- **[TornadoCash_whitepaper_v1.4.pdf](https://tornado.cash/audits/TornadoCash_whitepaper_v1.4.pdf)** -->
 
 ## Was it audited?
 
-<!-- XCD protocols, circuits, and smart contracts were audited by a group of experts from [ABDK Consulting](https://www.abdk.consulting), specializing in zero-knowledge, cryptography, and smart contracts. -->
+<!-- XCD protocols, circuits, and smart contracts were audited by a group of experts from , specializing in zero-knowledge, cryptography, and smart contracts. -->
 
 <!-- During the audit, no critical issues were found and all outstanding issues were fixed. The results can be found here:
 
-- Cryptographic review https://tornado.cash/audits/TornadoCash_cryptographic_review_ABDK.pdf
-- Smart contract audit https://tornado.cash/audits/TornadoCash_contract_audit_ABDK.pdf
-- Zk-SNARK circuits audit https://tornado.cash/audits/TornadoCash_circuit_audit_ABDK.pdf
 
 Underlying circomlib dependency is currently being audited, and the team already published most of the fixes for found issues -->
 
@@ -79,9 +74,6 @@ Use the command-line version. Works for Ganache, Kovan, and Mainnet:
 1. `./cli.js --help`
 
 ### Kovan, Mainnet
-<!-- 
-1. Please use https://github.com/tornadocash/tornado-cli
-   Reason: because tornado-core uses websnark `2041cfa5fa0b71cd5cca9022a4eeea4afe28c9f7` commit hash in order to work with local trusted setup. Tornado-cli uses `4c0af6a8b65aabea3c09f377f63c44e7a58afa6d` commit with production trusted setup of tornadoCash -->
 
 Example:
 
@@ -132,11 +124,6 @@ Example:
 3. Go to the `Contract` tab. Click on `Read Contract` and scroll down to the `5. text` method.
 4. Put the values.
 5. Click `Query` and you will get the DNS name. Just add `https://` to it and use it as `relayer url`
-
-## Credits
-
-<!-- Special thanks to @barryWhiteHat and @kobigurk for valuable input, -->
-<!-- and @jbaylina for awesome [Circom](https://github.com/iden3/circom) & [Websnark](https://github.com/iden3/websnark) framework -->
 
 ## Minimal demo example
 
