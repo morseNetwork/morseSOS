@@ -75,6 +75,9 @@ Use the command-line version. Works for Ganache, Kovan, and Mainnet:
 
 ### Kovan, Mainnet
 
+Please move to the prodCli directory for production and testing purposes.
+cd prodCli/
+
 Example:
 
 ```bash
