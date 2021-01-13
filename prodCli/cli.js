@@ -70,7 +70,7 @@ function createDeposit({ nullifier, secret }) {
 async function deposit({ currency, amount }) {
   const deposit = createDeposit({ nullifier: rbigint(31), secret: rbigint(31) })
   const note = toHex(deposit.preimage, 62)
-  const noteString = `tornado-${currency}-${amount}-${netId}-${note}`
+  const noteString = `XCD-${currency}-${amount}-${netId}-${note}`
   console.log(`Your note: ${noteString}`)
   if (currency === 'eth') {
     await printETHBalance({ address: tornado._address, name: 'XCD' })
@@ -398,7 +398,7 @@ function waitForTxReceipt({ txHash, attempts = 60, delay = 1000 }) {
  * @param noteString the note
  */
 function parseNote(noteString) {
-  const noteRegex = /tornado-(?<currency>\w+)-(?<amount>[\d.]+)-(?<netId>\d+)-0x(?<note>[0-9a-fA-F]{124})/g
+  const noteRegex = /XCD-(?<currency>\w+)-(?<amount>[\d.]+)-(?<netId>\d+)-0x(?<note>[0-9a-fA-F]{124})/g
   const match = noteRegex.exec(noteString)
   if (!match) {
     throw new Error('The note has invalid format')
