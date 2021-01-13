@@ -70,18 +70,18 @@ function createDeposit({ nullifier, secret }) {
 async function deposit({ currency, amount }) {
   const deposit = createDeposit({ nullifier: rbigint(31), secret: rbigint(31) })
   const note = toHex(deposit.preimage, 62)
-  const noteString = `XCD-${currency}-${amount}-${netId}-${note}`
+  const noteString = `Morse-${currency}-${amount}-${netId}-${note}`
   console.log(`Your note: ${noteString}`)
   if (currency === 'eth') {
-    await printETHBalance({ address: tornado._address, name: 'XCD' })
+    await printETHBalance({ address: tornado._address, name: 'Morse' })
     await printETHBalance({ address: senderAccount, name: 'Sender account' })
     const value = isLocalRPC ? ETH_AMOUNT : fromDecimals({ amount, decimals: 18 })
     console.log('Submitting deposit transaction')
     await tornado.methods.deposit(toHex(deposit.commitment)).send({ value, from: senderAccount, gas: 2e6 })
-    await printETHBalance({ address: tornado._address, name: 'XCD' })
+    await printETHBalance({ address: tornado._address, name: 'Morse' })
     await printETHBalance({ address: senderAccount, name: 'Sender account' })
   } else { // a token
-    await printERC20Balance({ address: tornado._address, name: 'XCD' })
+    await printERC20Balance({ address: tornado._address, name: 'Morse' })
     await printERC20Balance({ address: senderAccount, name: 'Sender account' })
     const decimals = isLocalRPC ? 18 : config.deployments[`netId${netId}`][currency].decimals
     const tokenAmount = isLocalRPC ? TOKEN_AMOUNT : fromDecimals({ amount, decimals })
@@ -99,7 +99,7 @@ async function deposit({ currency, amount }) {
 
     console.log('Submitting deposit transaction')
     await tornado.methods.deposit(toHex(deposit.commitment)).send({ from: senderAccount, gas: 2e6 })
-    await printERC20Balance({ address: tornado._address, name: 'XCD' })
+    await printERC20Balance({ address: tornado._address, name: 'Morse' })
     await printERC20Balance({ address: senderAccount, name: 'Sender account' })
   }
 
@@ -108,13 +108,13 @@ async function deposit({ currency, amount }) {
 
 /**
  * Generate merkle tree for a deposit.
- * Download deposit events from the XCD, reconstructs merkle tree, finds our deposit leaf
+ * Download deposit events from the Morse, reconstructs merkle tree, finds our deposit leaf
  * in it and generates merkle proof
  * @param deposit Deposit object
  */
 async function generateMerkleProof(deposit) {
   // Get all deposit events from smart contract and assemble merkle tree from them
-  console.log('Getting current state from XCD contract')
+  console.log('Getting current state from Morse contract')
   const events = await tornado.getPastEvents('Deposit', { fromBlock: 0, toBlock: 'latest' })
   const leaves = events
     .sort((a, b) => a.returnValues.leafIndex - b.returnValues.leafIndex) // Sort events in chronological order
@@ -398,7 +398,7 @@ function waitForTxReceipt({ txHash, attempts = 60, delay = 1000 }) {
  * @param noteString the note
  */
 function parseNote(noteString) {
-  const noteRegex = /XCD-(?<currency>\w+)-(?<amount>[\d.]+)-(?<netId>\d+)-0x(?<note>[0-9a-fA-F]{124})/g
+  const noteRegex = /Morse-(?<currency>\w+)-(?<amount>[\d.]+)-(?<netId>\d+)-0x(?<note>[0-9a-fA-F]{124})/g
   const match = noteRegex.exec(noteString)
   if (!match) {
     throw new Error('The note has invalid format')
@@ -477,7 +477,7 @@ async function init({ rpc, noteNetId, currency = 'dai', amount = '100' }) {
     // Initialize using injected web3 (Metamask)
     // To assemble web version run `npm run browserify`
     web3 = new Web3(window.web3.currentProvider, null, { transactionConfirmationBlocks: 1 })
-    contractJson = await (await fetch('build/contracts/XCD.json')).json()
+    contractJson = await (await fetch('build/contracts/Morse.json')).json()
     circuit = await (await fetch('build/circuits/withdraw.json')).json()
     proving_key = await (await fetch('build/circuits/withdraw_proving_key.bin')).arrayBuffer()
     MERKLE_TREE_HEIGHT = 20
@@ -487,7 +487,7 @@ async function init({ rpc, noteNetId, currency = 'dai', amount = '100' }) {
   } else {
     // Initialize from local node
     web3 = new Web3(rpc, null, { transactionConfirmationBlocks: 1 })
-    contractJson = require('./build/contracts/XCD.json')
+    contractJson = require('./build/contracts/Morse.json')
     circuit = require('./build/circuits/withdraw.json')
     proving_key = fs.readFileSync('build/circuits/withdraw_proving_key.bin').buffer
     MERKLE_TREE_HEIGHT = process.env.MERKLE_TREE_HEIGHT || 20
@@ -503,7 +503,7 @@ async function init({ rpc, noteNetId, currency = 'dai', amount = '100' }) {
       console.log('Warning! PRIVATE_KEY not found. Please provide PRIVATE_KEY in .env file if you deposit')
     }
     erc20ContractJson = require('./build/contracts/ERC20Mock.json')
-    erc20tornadoJson = require('./build/contracts/ERC20XCD.json')
+    erc20tornadoJson = require('./build/contracts/ERC20Morse.json')
   }
   // groth16 initialises a lot of Promises that will never be resolved, that's why we need to use process.exit to terminate the CLI
   groth16 = await buildGroth16()
@@ -525,7 +525,7 @@ async function init({ rpc, noteNetId, currency = 'dai', amount = '100' }) {
       }
       tokenAddress = config.deployments[`netId${netId}`][currency].tokenAddress
     } catch (e) {
-      console.error('There is no such XCD instance, check the currency and amount you provide')
+      console.error('There is no such Morse instance, check the currency and amount you provide')
       process.exit(1)
     }
   }

@@ -1,14 +1,14 @@
 pragma solidity 0.5.17;
 
-import "./XCD.sol";
+import "./Morse.sol";
 
-contract ETHXCD is XCD {
+contract ETHMorse is Morse {
   constructor(
     IVerifier _verifier,
     uint256 _denomination,
     uint32 _merkleTreeHeight,
     address _operator
-  ) XCD(_verifier, _denomination, _merkleTreeHeight, _operator) public {
+  ) Morse(_verifier, _denomination, _merkleTreeHeight, _operator) public {
   }
 
   function _processDeposit() internal {

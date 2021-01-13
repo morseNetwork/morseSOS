@@ -1,8 +1,8 @@
 pragma solidity 0.5.17;
 
-import "./XCD.sol";
+import "./Morse.sol";
 
-contract ERC20XCD is XCD {
+contract ERC20Morse is Morse {
   address public token;
 
   constructor(
@@ -11,7 +11,7 @@ contract ERC20XCD is XCD {
     uint32 _merkleTreeHeight,
     address _operator,
     address _token
-  ) XCD(_verifier, _denomination, _merkleTreeHeight, _operator) public {
+  ) Morse(_verifier, _denomination, _merkleTreeHeight, _operator) public {
     token = _token;
   }
 

@@ -20,7 +20,7 @@
     "migrate:rinkeby": "npx truffle migrate --network rinkeby --reset",
     "migrate:mainnet": "npx truffle migrate --network mainnet",
     "eslint": "npx eslint --ignore-path .gitignore .",
-    "flat": "npx truffle-flattener contracts/ETHXCD.sol > ETHTornado_flat.sol && npx truffle-flattener contracts/ERC20XCD.sol > ERC20Tornado_flat.sol",
+    "flat": "npx truffle-flattener contracts/ETHMorse.sol > ETHTornado_flat.sol && npx truffle-flattener contracts/ERC20Morse.sol > ERC20Tornado_flat.sol",
     "download": "node downloadKeys.js"
   },
   "keywords": [],

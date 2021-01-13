@@ -45,7 +45,7 @@ async function deposit() {
   console.log('Sending deposit transaction...')
   const tx = await contract.methods.deposit(toHex(deposit.commitment)).send({ value: toWei(AMOUNT), from: web3.eth.defaultAccount, gas:2e6 })
   console.log(`https://kovan.etherscan.io/tx/${tx.transactionHash}`)
-  return `XCD-eth-${AMOUNT}-${netId}-${toHex(deposit.preimage, 62)}`
+  return `Morse-eth-${AMOUNT}-${netId}-${toHex(deposit.preimage, 62)}`
 }
 
 /**
@@ -62,11 +62,11 @@ async function withdraw(note, recipient) {
 }
 
 /**
- * Parses XCD note
+ * Parses Morse note
  * @param noteString the note
  */
 function parseNote(noteString) {
-  const noteRegex = /XCD-(?<currency>\w+)-(?<amount>[\d.]+)-(?<netId>\d+)-0x(?<note>[0-9a-fA-F]{124})/g
+  const noteRegex = /Morse-(?<currency>\w+)-(?<amount>[\d.]+)-(?<netId>\d+)-0x(?<note>[0-9a-fA-F]{124})/g
   const match = noteRegex.exec(noteString)
 
   // we are ignoring `currency`, `amount`, and `netId` for this minimal example
@@ -153,7 +153,7 @@ async function main() {
   proving_key = fs.readFileSync('build/circuits/withdraw_proving_key.bin').buffer
   groth16 = await buildGroth16()
   netId = await web3.eth.net.getId()
-  contract = new web3.eth.Contract(require('./build/contracts/ETHXCD.json').abi, CONTRACT_ADDRESS)
+  contract = new web3.eth.Contract(require('./build/contracts/ETHMorse.json').abi, CONTRACT_ADDRESS)
   const account = web3.eth.accounts.privateKeyToAccount('0x' + PRIVATE_KEY)
   web3.eth.accounts.wallet.add('0x' + PRIVATE_KEY)
   // eslint-disable-next-line require-atomic-updates

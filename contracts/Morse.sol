@@ -7,7 +7,7 @@ contract IVerifier {
   function verifyProof(bytes memory _proof, uint256[6] memory _input) public returns(bool);
 }
 
-contract XCD is MerkleTreeWithHistory, ReentrancyGuard {
+contract Morse is MerkleTreeWithHistory, ReentrancyGuard {
   uint256 public denomination;
   mapping(bytes32 => bool) public nullifierHashes;
   // we store all commitments just to prevent accidental deposits with the same commitment
