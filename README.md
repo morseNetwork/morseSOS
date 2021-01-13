@@ -1,4 +1,4 @@
-# Morse Privacy Solution [![Build Status](https://travis-ci.com/exceedfinance/Morse.svg?token=jFqeswMQDLDxsjsty1GZ&branch=master)](https://travis-ci.com/exceedfinance/Morse)
+# Morse Privacy Solution [![Build Status](https://travis-ci.com/exceedfinance/morseSos.svg?token=jFqeswMQDLDxsjsty1GZ&branch=master)](https://travis-ci.com/exceedfinance/morseSos)
 
 Morse is a non-custodial Ethereum and ERC20 privacy solution based on zkSNARKs. It improves transaction privacy by breaking the on-chain link between the recipient and destination addresses. It uses a smart contract that accepts ETH deposits that can be withdrawn by a different address. Whenever ETH is withdrawn by the new address, there is no way to link the withdrawal to the deposit, ensuring complete privacy.
 
